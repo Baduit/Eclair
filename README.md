@@ -7,7 +7,7 @@ It is a C++ header only library to call method of an object in a thread safe way
 int main()
 {
   Eclair::Value<std::string> str;
-  auto i = str.size(); // It lock a mutex, then call str.size() then unlock the mutex
+  auto i = str->size(); // It lock a mutex, then call str.size() then unlock the mutex
 }
 ```
 
