@@ -31,7 +31,7 @@ int main()
 		{
 			while(run)
 			{
-        // Increment the value accessing the attribute twice in the same line
+        // Increment the value accessing the attribute twice in the same statement
 				my_struct->value = my_struct->value + 1;
         // Call the method print (the value might has been updated in another thread between this line and the line above)
 				my_struct->print();
