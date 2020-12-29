@@ -20,6 +20,9 @@ It could be downgraded if we remove the concepts and make the comparisons operat
 Dark magic (kidding)
 TODO
 
+## Why is a std::recursive_mutex by default ?
+The mutex is not unlock when the destructor of the temporary object holding the lock is destroyed and not just after the action with the operator-> is finished, therefore if there are 2 uses of the operator-> in the same line it would cause a deadlock.
+
 ## Limitations
 Mutexes are not a magic solution to make a multithreaded program, there are risk of deadlock (really bad) and it does not scale if a lot of thread must access the data. A good multithreaded should avoid sharing ressource and if information is needed across multiple thread, passing message between your thread is better. (and there is a lot of good ressource for it on the web) I made this library because I find the idea interesting and it has a really cool syntax.
 
