@@ -1,13 +1,12 @@
-set(SRCS ./my_lib/my_lib.cpp)
+add_library(Eclair INTERFACE)
 
+target_sources(Eclair INTERFACE ${CMAKE_CURRENT_LIST_DIR}/Eclair/Eclair.hpp)
 
-add_library(my_lib ${SRCS})
+target_compile_features(Eclair INTERFACE cxx_std_20)
 
-target_compile_features(my_lib PUBLIC cxx_std_20)
-
-target_compile_options(my_lib
-                       PRIVATE
+target_compile_options(Eclair
+                       INTERFACE
                        $<$<CXX_COMPILER_ID:MSVC>:/W3 /permissive- /TP>
                        $<$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:Clang>>:-Wextra -Wall -Wsign-conversion -Wfloat-equal -pedantic -Wredundant-decls -Wshadow -Wpointer-arith -O3>)
 
-target_include_directories(my_lib PUBLIC ${CMAKE_CURRENT_LIST_DIR})
+target_include_directories(Eclair INTERFACE ${CMAKE_CURRENT_LIST_DIR})

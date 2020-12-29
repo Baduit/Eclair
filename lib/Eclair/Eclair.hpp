@@ -1,6 +1,6 @@
 #pragma once
 
-namespace my_lib
+namespace Eclair
 {
 
 int add(int a, int b);
