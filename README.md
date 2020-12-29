@@ -8,6 +8,7 @@ int main()
 {
   Eclair::Value<std::string> str;
   auto i = str->size(); // It lock a mutex, then call str.size() then unlock the mutex
+  // Todo make a better example with several thread using the ressource
 }
 ```
 
@@ -20,7 +21,7 @@ Dark magic (kidding)
 TODO
 
 ## Limitations
-TODO
+Mutexes are not a magic solution to make a multithreaded program, there are risk of deadlock (really bad) and it does not scale if a lot of thread must access the data. A good multithreaded should avoid sharing ressource and if information is needed across multiple thread, passing message between your thread is better. (and there is a lot of good ressource for it on the web) I made this library because I find the idea interesting and it has a really cool syntax.
 
 ## Why is it named "éclair" ?
 Because it is a very good bakery with the good stuff inside it (the icing).
