@@ -31,19 +31,26 @@ int main()
 		{
 			while(run)
 			{
+        // Increment the value accessing the attribute twice in the same line
 				my_struct->value = my_struct->value + 1;
+        // Call the method print (the value might has been updated in another thread between this line and the line above)
 				my_struct->print();
 			}
 		};
 
+  // Start the threads
 	std::thread a(cb);
 	std::thread b(cb);
 	std::thread c(cb);
 
+  // Wait 5s
 	using namespace std::chrono_literals;
 	std::this_thread::sleep_for(5s);
+
+  // Stop the threads
 	run = false;
 
+  // Join all the threads
 	a.join();
 	b.join();
 	c.join();
