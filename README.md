@@ -57,8 +57,8 @@ A C++20 compiler.
 It could be downgraded if we remove the concepts and make the comparisons operators the old way in the wrapper.
 
 ## How does it work ?
-Dark magic (kidding)
-TODO
+It uses the fact that [the operator-> if it does not return a pointer return the result of the operator-> of the returned object](https://en.cppreference.com/w/cpp/language/operators#Restrictions).
+The Eclair::Value class operate as a simple wrapper with a mutex, it has its operator-> overloaded to return a temporary Eclair::Middleware with a pointer to the wrapped value and a reference to the wrapper mutex then the middleware lock the mutex in its constructor (using a std::lock_guard). It has an operator-> that return the pointer to the wrapped value. When the temporary middleware is destroyed the mutex is automatically unlocked.
 
 ## Why is a std::recursive_mutex by default ?
 The mutex is not unlock when the destructor of the temporary object holding the lock is destroyed and not just after the action with the operator-> is finished, therefore if there are 2 uses of the operator-> in the same line it would cause a deadlock.

@@ -27,10 +27,10 @@ concept Pointer = std::is_pointer_v<T>;
 
 
 template <Pointer T, typename M>
-class MiddleWare
+class Middleware
 {
 	public:
-		MiddleWare(T v, M& m):
+		Middleware(T v, M& m):
 			_value(v),
 			_lock(m)
 		{}
@@ -70,8 +70,8 @@ class Value
 			return *this;
 		}
 
-		MiddleWare<T*, M> operator->() { return MiddleWare<T*, M>(&_value, _mutex); }
-		MiddleWare<const T*, M> operator->() const { return MiddleWare<const T*, M>(&_value, _mutex); }
+		Middleware<T*, M> operator->() { return Middleware<T*, M>(&_value, _mutex); }
+		Middleware<const T*, M> operator->() const { return Middleware<const T*, M>(&_value, _mutex); }
 
 	private:
 		mutable M _mutex;
